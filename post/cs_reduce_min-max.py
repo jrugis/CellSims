@@ -1,0 +1,33 @@
+import numpy as np
+import os
+import struct
+import sys
+
+import cs
+
+##################################################################
+# functions
+##################################################################
+def read_write_data(fname):
+  data = cs.get_data(fname + ".bin")
+  max_per_row = np.amax(data, axis=1)
+  rows = [np.argmax(max_per_row), np.argmin(max_per_row)]
+  cols = data.shape[1]
+  f = open(fname + "R.bin", "wb")
+  f.write(struct.pack('l', len(rows)))
+  f.write(struct.pack('l', cols))
+  for i in range(0, cols):     # the data is in column order
+    for j in rows:
+      f.write(struct.pack('f', data[j, i]))
+  f.close() 
+  return
+
+##################################################################
+# main program
+##################################################################
+
+results_dir = str(sys.argv[1])
+fname = results_dir + "/c"
+read_write_data(fname)
+fname = results_dir + "/ip3"
+read_write_data(fname)

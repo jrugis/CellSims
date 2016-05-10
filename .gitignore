@@ -1,0 +1,7 @@
+cs*/
+*.pdf
+
+!generic_PDE_03.pdf
+!generic_PDE_04.pdf
+
+
