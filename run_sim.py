@@ -1,19 +1,26 @@
 import os
 import time
 
+##################################################################
+# USER EDIT THIS SECTION
+##################################################################
+
+# uncomment ONE platform
 platform = "linux"
 #platform = "pan"
 
-model = "generic3d_03"
+# set the mesh and model
 mesh = "cell01m_HARMONIC_100p"
+model = "generic3d_03"   # implicit Cer diffusion constant
+#model = "generic3d_04"   # separate Cer diffusion constant
 
-# fixed parameters
+# list fixed parameters (if any)
 #parms = [["PLCds", 0.5], ["IPRdn", 0.5], ["IPRdf", 3.5]]
 #parms = [["kRyR", 0.0]]
 #parms = [["Dce", 5.0]]
 parms = []
 
-# 2D parameter sweep
+# list 2D parameter sweep values
 #parmA = "Vdeg"
 #valsA = [0.16, 0.18]
 #parmB = "K3K"
