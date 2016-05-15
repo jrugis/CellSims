@@ -1,7 +1,8 @@
-CS*/
-*.pdf
+results/
+misc/
 
-!generic_PDE_03.pdf
-!generic_PDE_04.pdf
+generic3d_0?
+*.pyc
+
 
 

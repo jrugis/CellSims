@@ -5,7 +5,7 @@ platform = "linux"
 #platform = "pan"
 
 model = "generic3d_03"
-mesh = "cell07m_HARMONIC_100p"
+mesh = "cell01m_HARMONIC_100p"
 
 # fixed parameters
 #parms = [["PLCds", 0.5], ["IPRdn", 0.5], ["IPRdf", 3.5]]
@@ -63,6 +63,9 @@ print "Cell Simulation:", model, mesh
 
 # create the top level results directory
 csdir = os.getcwd()
+
+if not os.path.exists("results"):
+    os.makedirs("results")
 path = "results/CS" + time.strftime("%y%m%d%H%M%S")
 os.mkdir(path)
 os.chdir(path)
@@ -88,7 +91,7 @@ for v1 in valsA:
     replace_pvalue(parmA, v1) # set the swept values
     replace_pvalue(parmB, v2)
 
-    if platform == "linux:
+    if platform == "linux":
         NP_MAX = 10
 
         # wait if at maximum number of parallel processes
@@ -97,9 +100,10 @@ for v1 in valsA:
 
         # run a non-blocking simulation process
         print(pdir)
-        os.system("bash " + csdir + "/run_sim_linux.sh " + model + " " + mesh + " &")
+        os.system("bash " + csdir + "/linux.sh " + model + " " + mesh + " &")
         time.sleep(5) # wait until after startup memory useage peak
     elif platform == "pan":
+        print "pan"
     else:
         print "ERROR: platform not specified"    
 

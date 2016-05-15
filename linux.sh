@@ -8,7 +8,7 @@ mv cs.dat $1.dat
 mv cs.msh $2.msh
 
 # create reduced content output files
-python ../../../cs_reduce_min-max.py .
+python ../../../post/cs_reduce_min-max.py .
 
 
 
