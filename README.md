@@ -41,6 +41,8 @@ Cell simulation runtime environment.
 2. Navigate to YOUR working directory:
   1. e.g.: /projects/nesi00119/sims/JWR_CellSims
 3. git clone https://github.com/jrugis/CellSims.git
+4. copy and rename executable:
+  1. e.g.: cp CellSims/executables/generic3d_03_pan CellSims/executables/generic3d_03
 
 ##setting up linux
 
