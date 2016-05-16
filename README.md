@@ -1,9 +1,7 @@
 # CellSims
 Cell simulation runtime environment.
 
-##linux
-
-##pan
+##running on pan
 1. (optional) Mount cluster file system: 
   login.uoa.nesi.org.nz
 2. Connect to cluster from terminal:
@@ -34,4 +32,18 @@ Cell simulation runtime environment.
        python post/cs_results_R_all.py results/DIR_NAME
   3. display individual results:
        python post/cs_results_R.py results/DIR_NAME/SUB_DIR_NAME
+
+##running on linux
+
+##setting up pan
+1. Connect to cluster from terminal:
+  ssh -Y UPI@login.uoa.nesi.org.nz
+  ssh -Y build-sb
+2. Navigate to YOUR working directory:
+/projects/nesi00119/sims
+  e.g.: JWR_CellSims/
+3. git clone https://github.com/jrugis/CellSims.git
+
+##setting up linux
+
 
