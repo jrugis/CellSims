@@ -29,5 +29,5 @@ mv cs.dat "$vModel.dat"
 mv cs.msh "$vMesh.msh"
 
 # create reduced content output files
-python "$vRoot/post/cs_reduce.py" "."
+python "$vRoot/post/cs_reduce_min-max.py" "."
 
