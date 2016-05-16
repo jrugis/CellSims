@@ -1,9 +1,11 @@
 ##################################################################
 #
 # USER EDITABLE SWEEP SETTINGS
-#   - the sweep parameters will be used in the results 
-#     directory names
+#
+#   - this file should be copied and renamed _my_sweep.py
 #   - DO NOT alter the two-space indentation in this file
+#   - the sweep parameters will be used in the results 
+#     directory naming
 # 
 ##################################################################
 
