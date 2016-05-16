@@ -2,7 +2,7 @@
 #SBATCH -J Hybrid_JOB
 #SBATCH -A nesi00119         # Project Account
 #SBATCH --time=0:19:00       # Walltime HH:MM:SS
-#SBATCH --mem-per-cpu=8G     # Memory
+#SBATCH --mem-per-cpu=16G     # Memory
 #SBATCH --ntasks=1           # number of tasks
 #SBATCH --cpus-per-task=1    # number of threads
 ##SBATCH --nodes=1           # number nodes
