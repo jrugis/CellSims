@@ -10,7 +10,7 @@ Cell simulation runtime environment.
 4. Simulation setup:
   1. (optional) edit model default parameter settings: e.g. parameters/generic3d_03.dat 
   2. edit platform, fixed and sweep parameters in python script file: run_sim.py
-  3. edit Walltime as required (at least ~1 minute per 500 time steps): run_sim.sl
+  3. edit Walltime as required (at least ~1 minute per 400 time steps): run_sim.sl
 5. Run the simulation:
   1. (only required once per session) module load Python/2.7.9-intel-2015a 
   2. execute python script: python run_sim.py
