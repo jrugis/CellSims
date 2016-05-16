@@ -6,8 +6,8 @@ import time
 ##################################################################
 
 # uncomment ONE platform
-platform = "linux"
-#platform = "pan"
+#platform = "linux"
+platform = "pan"
 
 # set the mesh and model
 mesh = "cell01m_HARMONIC_100p"
@@ -110,7 +110,7 @@ for v1 in valsA:
         os.system("bash " + csdir + "/linux.sh " + model + " " + mesh + " &")
         time.sleep(5) # wait until after startup memory useage peak
     elif platform == "pan":
-        print "pan"
+        os.system("sbatch " + csdir + "/run_sim.sl " + model + " " + mesh + " " + csdir)
     else:
         print "ERROR: platform not specified"    
 
