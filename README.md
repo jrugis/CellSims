@@ -39,7 +39,7 @@ Cell simulation runtime environment.
   1. ssh -Y UPI@login.uoa.nesi.org.nz
   2. ssh -Y build-sb
 2. Navigate to YOUR working directory:
-  1. e.g.: /projects/nesi00119/sims/JWR_CellSims/CellSims
+  1. e.g.: /projects/nesi00119/sims/JWR_CellSims
 3. git clone https://github.com/jrugis/CellSims.git
 
 ##setting up linux
