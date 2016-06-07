@@ -10,7 +10,7 @@ import time
 platform = "pan"
 
 # set the mesh and model
-mesh = "cell01m_HARMONIC_100p"
+mesh = "cell07m_HARMONIC_100p"
 model = "generic3d_03"   # implicit Cer diffusion constant
 #model = "generic3d_04"   # separate Cer diffusion constant
 
@@ -25,10 +25,20 @@ parms = []
 #valsA = [0.16, 0.18]
 #parmB = "K3K"
 #valsB = [0.4, 0.43]
+
 parmA = "VPLC"
-valsA = [0.01, 0.02, 0.03, 0.04, 0.05]
+# cell 00, 03, 05
+#valsA = [0.01, 0.02, 0.03, 0.04, 0.05]
+# cell 02, 06, 07
+valsA = [0.006, 0.008, 0.01, 0.02, 0.03]
+# cell 04
+#valsA = [0.005, 0.0055, 0.006, 0.0065, 0.007]
+
 parmB = "kIPR"
 valsB = [2.0, 4.0, 6.0, 8.0, 10.0, 12.0]
+# cell 04
+#valsB = [6.0, 6.5, 7.0, 7.5, 8.0]
+
 #parmA = "IPRdf"
 #valsA = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5]
 #parmB = "IPRdn"
