@@ -32,9 +32,10 @@ plots[1].plot(y, np.transpose(cs.get_data('ip3R.bin')), lw=0.5)
 plt.xlabel('time (s)')
 fig.text(0.02, 0.96, info)
 
-open('temp.pdf', 'w').close()
-plt.savefig('temp.pdf')
-os.rename('temp.pdf', path + '/' + info + '.pdf')
+open('../temp.pdf', 'w').close()
+plt.savefig('../temp.pdf')
+os.rename('../temp.pdf', '../' + info + '.pdf')
+
 plt.show()
 
 # go back to top level
