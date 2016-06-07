@@ -42,7 +42,7 @@ plt.rcParams['axes.color_cycle'] = ['r', 'g', 'b']
 fig, plots = plt.subplots(rows, cols, sharex='col', sharey='row')
 fig.canvas.set_window_title(results_dir) 
 fig.text(0.02, 0.96, rdir + '/' + bdir, fontsize=10)
-fig.set_size_inches(12, 12)
+fig.set_size_inches(cols * 1.5, rows * 1.5)
 plots[rows-1, 0].set_xlabel("time (s)")
 plots[rows-1, 0].set_ylabel("CA+ concentration (uM)")
 

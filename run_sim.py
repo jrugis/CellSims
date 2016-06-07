@@ -53,8 +53,8 @@ os.chdir(path)
 for v1 in valsA:
   for v2 in valsB:
     pdir = ""
-    for pv in parms:
-      pdir += pv[0] + '-' + str(pv[1]) + '_'
+    #for pv in parms:
+    #  pdir += pv[0] + '-' + str(pv[1]) + '_'
     pdir += parmA + '-' + str(v1) + '_' + parmB + '-' + str(v2)
     pdir = pdir.replace('.', 'p')
     os.mkdir(pdir)
