@@ -13,14 +13,14 @@ def sweep_parms():
   ###################################
   # uncomment ONE platform
   ###################################
-  platform = "linux"
-  #platform = "pan"
+  #platform = "linux"
+  platform = "pan"
 
   ###################################
   # set the mesh and model
   ###################################
   mesh = "cell01m_HARMONIC_100p"
-  model = "generic3d_03"   # implicit Cer diffusion constant
+  model = "generic3d_03"   # using implicit Cer diffusion constant
   #model = "generic3d_04"   # separate Cer diffusion constant
 
   ###################################

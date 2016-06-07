@@ -1,4 +1,4 @@
-To run a parameter sweep simulation, either under linux or on the pan cluster:
+To run a parameter sweep simulation, either under on a linux workstation or on the pan cluster:
 
 1) (optional, pan cluster only) Mount cluster file system: 
 
