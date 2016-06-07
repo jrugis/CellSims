@@ -15,16 +15,13 @@ To run a parameter sweep simulation, either under on a linux workstation or on t
 
 4) Simulation setup:
 
-   (optional) edit model default parameter settings: 
-     e.g. parameters/generic3d_03.dat 
-
    (one time only) make a copy of the parameters script file:
      cp sweep.py _my_sweep.py
  
    edit platform, fixed and swept parameters in script file: 
      _my_sweep.py
 
-   (pan only) edit Walltime as required (at least ~1 minute per 400 time steps):
+   (pan only) edit Walltime (at least ~1 minute per 400 time steps) and resources as required:
      run_sim.sl
 
 5) Run the simulation:
