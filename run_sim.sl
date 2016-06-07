@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J CellSim
+#SBATCH -J Cell_Sim
 #SBATCH -A nesi00119         # Project Account
 #SBATCH --time=0:19:00       # Walltime HH:MM:SS
 #SBATCH --mem-per-cpu=8G     # Memory
