@@ -1,5 +1,6 @@
 results/
-misc/
+_*/*
+_*
 
 generic3d_0?
 *.pyc

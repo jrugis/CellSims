@@ -26,8 +26,7 @@ def read_write_data(fname):
 # main program
 ##################################################################
 
-results_dir = str(sys.argv[1])
-fname = results_dir + "/c"
-read_write_data(fname)
-fname = results_dir + "/ip3"
-read_write_data(fname)
+read_write_data("c")
+read_write_data("ip3")
+
+

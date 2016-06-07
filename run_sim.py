@@ -1,6 +1,8 @@
 import os
 import time
 
+import _my_sweep
+
 ##################################################################
 # USER EDIT THIS SECTION
 ##################################################################
@@ -76,6 +78,8 @@ def replace_pvalue(p, v):
 # main program
 ##################################################################
 
+# get the user set parameters
+platform, mesh, model, parms, parmA, valsA, parmB, valsB = _my_sweep.sweep_parms()
 print "Cell Simulation:", model, mesh
 
 # create the top level results directory
@@ -109,7 +113,7 @@ for v1 in valsA:
     replace_pvalue(parmB, v2)
 
     if platform == "linux":
-        NP_MAX = 10
+        NP_MAX = 12
 
         # wait if at maximum number of parallel processes
         while int(os.popen("ps | grep " + model + " | wc -l").read()) >= NP_MAX:
@@ -118,7 +122,7 @@ for v1 in valsA:
         # run a non-blocking simulation process
         print(pdir)
         os.system("bash " + csdir + "/linux.sh " + model + " " + mesh + " &")
-        time.sleep(5) # wait until after startup memory useage peak
+        time.sleep(0.5) # wait until after startup memory useage peak
     elif platform == "pan":
         os.system("sbatch " + csdir + "/run_sim.sl " + model + " " + mesh + " " + csdir)
     else:
