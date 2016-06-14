@@ -5,7 +5,7 @@
 #SBATCH --mem-per-cpu=8G     # Memory
 #SBATCH --ntasks=1           # number of tasks
 #SBATCH --cpus-per-task=1    # number of threads
-#SBATCH --gres=gpu:1         # for cuda version only!
+##SBATCH --gres=gpu:1         # for cuda version only!
 
 # output some information
 echo $HOSTNAME

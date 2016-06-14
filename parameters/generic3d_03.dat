@@ -20,7 +20,7 @@
 %----------------------------------------------------
 % near/far distance from lumen, minimum 
 %! IPRdn IPRdf IPRmin
-0.4 2.5 0.05
+0.4 2.5 0.03
 %----------------------------------------------------
 % distance from surface, distance from lumen
 %! PLCds PLCdl
