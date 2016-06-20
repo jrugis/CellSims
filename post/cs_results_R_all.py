@@ -39,7 +39,7 @@ print valsB
 cols = len(valsA)
 rows = len(valsB)
 plt.rcParams['axes.color_cycle'] = ['r', 'g', 'b']
-fig, plots = plt.subplots(rows, cols, sharex='col', sharey='row')
+fig, plots = plt.subplots(rows, cols, sharex='col', sharey='all')
 fig.canvas.set_window_title(results_dir) 
 fig.text(0.02, 0.96, rdir + '/' + bdir, fontsize=10)
 fig.set_size_inches(cols * 3, rows * 3)
