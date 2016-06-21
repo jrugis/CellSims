@@ -18,10 +18,10 @@ To run a parameter sweep simulation, either under on a linux workstation or on t
    (one time only) make a copy of the parameters script file:
      cp sweep.py _my_sweep.py
  
-   edit platform, fixed and swept parameters in script file: 
+   edit platform, solver, model, mesh type, fixed and swept parameters in script file: 
      _my_sweep.py
 
-   (pan only) edit Walltime (at least ~1 minute per 400 time steps) and resources as required:
+   (pan only) edit Walltime (at least ~5 minutes per every 100 seconds of simulation time) and resources as required:
      run_sim.sl
 
 5) Run the simulation:
@@ -42,9 +42,12 @@ To run a parameter sweep simulation, either under on a linux workstation or on t
     ls results/DIR_NAME
 
   display sweep results: 
-    python post/cs_results_R_all.py results/DIR_NAME
+    for a given cell: 
+      python post/cs_results_R_cell.py results/DIR_NAME CELL_NUMBER
+    across all cells for a given parameter:
+      python post/cs_results_R_parms.py results/DIR_NAME PARAMETERS
 
   display individual results:
-    python post/cs_results_R.py results/DIR_NAME/SUB_DIR_NAME
+    python post/cs_results_R-single.py results/DIR_NAME/SUB_DIR_NAME
 
 
