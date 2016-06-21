@@ -2,6 +2,7 @@
 #SBATCH -J Cell_Sim
 #SBATCH -A nesi00119         # Project Account
 #SBATCH --time=0:19:00       # Walltime HH:MM:SS
+#SBATCH --requeue            # requeue job if hardware failure
 #SBATCH --mem-per-cpu=8G     # Memory
 #SBATCH --ntasks=1           # number of tasks
 #SBATCH --cpus-per-task=1    # number of threads
@@ -13,7 +14,6 @@ echo $HOSTNAME
 # load module(s)
 module load intel/2015a
 module load Python/2.7.9-intel-2015a
-export LD_LIBRARY_PATH=/projects/nesi00119/code/JR_petsc/petsc-3.5.4/linux-intel/lib:$LD_LIBRARY_PATH
 
 # get variables from command line
 vExe=$1   # executable name
