@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -J Cell_Sim
 #SBATCH -A nesi00119         # Project Account
-#SBATCH --time=0:19:00       # Walltime HH:MM:SS
+#SBATCH --time=0:29:00       # Walltime HH:MM:SS
 #SBATCH --requeue            # requeue job if hardware failure
 #SBATCH --mem-per-cpu=8G     # Memory
 #SBATCH --ntasks=1           # number of tasks
@@ -22,7 +22,7 @@ vMesh=$3    # mesh name
 vRoot=$4    # simulation root directory
 
 # run the job
-srun -o "$vModel.txt" "$vRoot/executables/$vExe"
+srun -o "$vExe.txt" "$vRoot/executables/$vExe"
 
 # post-processing
 mv cs.dat "$vModel.dat"
