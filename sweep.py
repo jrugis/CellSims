@@ -19,7 +19,7 @@ def sweep_parms():
   ###################################
   # set the mesh and model
   ###################################
-  mesh = "cell01m_HARMONIC_100p"
+  mesh = "cell07m_HARMONIC_100p"
   model = "generic3d_03"   # using implicit Cer diffusion constant
   #model = "generic3d_04"   # separate Cer diffusion constant
 
@@ -47,7 +47,7 @@ def sweep_parms():
   parmA = "VPLC"
   valsA = [0.01, 0.02, 0.03, 0.04, 0.05]
   parmB = "kIPR"
-  valsB = [2.0, 4.0, 6.0, 8.0, 10.0, 12.0]
+  valsB = [4.0, 6.0, 8.0]
 
   ###################################
   return platform, mesh, model, parms, parmA, valsA, parmB, valsB
