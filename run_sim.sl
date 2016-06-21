@@ -16,12 +16,13 @@ module load Python/2.7.9-intel-2015a
 export LD_LIBRARY_PATH=/projects/nesi00119/code/JR_petsc/petsc-3.5.4/linux-intel/lib:$LD_LIBRARY_PATH
 
 # get variables from command line
-vModel=$1   # model name
-vMesh=$2    # mesh name
-vRoot=$3    # simulation root directory
+vExe=$1   # executable name
+vModel=$2   # model name
+vMesh=$3    # mesh name
+vRoot=$4    # simulation root directory
 
 # run the job
-srun -o "$vModel.txt" "$vRoot/executables/$vModel"
+srun -o "$vModel.txt" "$vRoot/executables/$vExe"
 
 # post-processing
 mv cs.dat "$vModel.dat"
