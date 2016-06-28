@@ -1,5 +1,7 @@
+from __future__ import print_function
 import os
 import time
+import shutil
 
 import _my_sweep
 
@@ -47,7 +49,13 @@ path = "results/CS" + time.strftime("%y%m%d%H%M%S")
 os.mkdir(path)
 os.chdir(path)
 model_full = model + "_" + platform + "_" + solver
-print "Cell Simulation:", model_full
+print("Cell Simulation:", model_full)
+
+# on pan we create an empty file to store the paths to simulation directories and arguments
+if platform == "pan":
+    os.mkdir("slurm")
+    fpan = open(os.path.join("slurm", "_pan_array.in"), "w")
+    num_sims = 0  # counter for the total number of simulations
 
 # iterate through seven cells and all the parameters
 for cell in range(1, 8):
@@ -55,7 +63,7 @@ for cell in range(1, 8):
   os.mkdir(path)
   os.chdir(path)
   mesh = "cell0" + str(cell) + mesh_type
-  print mesh
+  print(mesh)
   for v1 in valsA:
     for v2 in valsB:
       pdir = ""
@@ -87,14 +95,33 @@ for cell in range(1, 8):
           os.system("bash " + csdir + "/linux.sh " + model_full + " " + model + " " + mesh + " " + csdir + " &")
           time.sleep(0.5) # wait until after startup memory useage peak
       elif platform == "pan":
-          os.system("sbatch " + csdir + "/run_sim.sl " + model_full + " " + model + " " + mesh + " " + csdir)
+          fpan.write(os.getcwd() + " " + model_full + " " + model + " " + mesh + " " + csdir + "\n")
+          num_sims += 1
       else:
-          print "ERROR: invalid platform -", platform    
+          print("ERROR: invalid platform -", platform)
 
       os.chdir("..")
   os.chdir("..")
 
+# submit array job on pan
+if platform == "pan":
+    print("Submitting array job with {0} individual jobs".format(num_sims))
+    fpan.close()
+    os.chdir("slurm")
+
+    # copy and edit slurm script
+    with open(os.path.join(csdir, "run_sim.sl")) as fh:
+        lines = fh.readlines()
+    for i, line in enumerate(lines):
+        if line.startswith("#SBATCH --array="):
+            lines[i] = "#SBATCH --array=1-{0}\n".format(num_sims)
+    with open("_run_sim.sl", "w") as fh:
+        fh.write("".join(lines))
+
+    # submit slurm script
+    os.system("sbatch _run_sim.sl")
+
+    os.chdir("..")
+
 # go back to top level
 os.chdir(csdir)
-
-
