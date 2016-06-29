@@ -1,4 +1,6 @@
 # CellSims
+[![DOI](https://zenodo.org/badge/23023/jrugis/CellSims.svg)](https://zenodo.org/badge/latestdoi/23023/jrugis/CellSims)
+
 Cell simulation runtime environment.
 
 See README.txt for enduser runtime instructions.
