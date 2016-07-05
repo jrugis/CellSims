@@ -109,17 +109,41 @@ if platform == "pan":
     fpan.close()
     os.chdir("slurm")
 
-    # copy and edit slurm script
-    with open(os.path.join(csdir, "run_sim.sl")) as fh:
+    # read default submission script
+    with open(os.path.join(csdir, "run_sim_array.sl")) as fh:
         lines = fh.readlines()
+    
+    # are we using CUDA
+    use_cuda = "cuda" in solver
+
+    # configure submission script
+    config_count = 0
     for i, line in enumerate(lines):
+        # set array size
         if line.startswith("#SBATCH --array="):
             lines[i] = "#SBATCH --array=1-{0}\n".format(num_sims)
-    with open("_run_sim.sl", "w") as fh:
+            config_count += 1
+        
+        # ask for GPU resource, if using the cuda version
+        if use_cuda:
+            if line.startswith("##SBATCH --gres=gpu"):
+                lines[i] = line[1:]
+                config_count += 1
+            elif line.startswith("#SBATCH -C"):
+                lines[i] = "##SBATCH -C sb&kepler\n"
+                config_count += 1
+
+    # check submission script configured correctly
+    config_count_correct = 3 if use_cuda else 1
+    if config_count != config_count_correct:
+        raise RuntimeError("Failed to configure SLURM submission script (%d)!" % config_count)
+
+    # write configured submission script to run directory
+    with open("_run_sim_array.sl", "w") as fh:
         fh.write("".join(lines))
 
     # submit slurm script
-    os.system("sbatch _run_sim.sl")
+    os.system("sbatch _run_sim_array.sl")
 
     os.chdir("..")
 

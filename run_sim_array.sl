@@ -1,20 +1,19 @@
 #!/bin/bash
 #SBATCH -J Cell_Sim
-#SBATCH -A nesi00119         # Project Account
-#SBATCH --time=0:29:00       # Walltime HH:MM:SS
-#SBATCH --mem-per-cpu=2G     # Memory
-#SBATCH --ntasks=1           # number of tasks
-#SBATCH --cpus-per-task=1    # number of threads
-#SBATCH --array=1-11         # size of array job (updated automatically)
-#SBATCH -C avx               # run on ivybridge or sandybridge (faster than westmere)
-##SBATCH --gres=gpu:1         # for cuda version only!
-
-# output some information
-echo $HOSTNAME
+#SBATCH -A nesi00119               # Project Account
+#SBATCH --time=0:29:00             # Walltime HH:MM:SS
+#SBATCH --mem-per-cpu=2G           # Memory
+#SBATCH --ntasks=1                 # number of tasks
+#SBATCH --cpus-per-task=1          # number of threads
+#SBATCH --output=slurm_output.txt  # output file
+#SBATCH --array=1-11               # size of array job (updated automatically)
+#SBATCH -C avx                     # run on ivybridge or sandybridge (faster than westmere)
+##SBATCH --gres=gpu:1              # for cuda version only! (updated automatically)
 
 # load module(s)
 module load intel/2015a
 module load Python/2.7.9-intel-2015a
+module load CUDA/7.5.18
 
 # check array file exists
 if [ ! -f _pan_array.in ]; then
@@ -31,7 +30,7 @@ vMesh=$4    # mesh name
 vRoot=$5    # simulation root directory
 
 # switch to working directory
-echo "Working dir: $1"
+echo "$HOSTNAME : $1"
 cd $1
 
 # run the job
