@@ -2,6 +2,7 @@ from __future__ import print_function
 import os
 import time
 import shutil
+import subprocess
 
 import _my_sweep
 
@@ -32,6 +33,33 @@ def replace_pvalue(p, v):
   fout.close()
   os.rename("temp.dat", "cs.dat")
   return
+
+# configure slurm script
+def configure_slurm(default_file, output_file):
+    # read default submission script
+    with open(default_file) as fh:
+        lines = fh.readlines()
+
+    # are we using CUDA
+    use_cuda = "cuda" in solver
+
+    # configure submission script
+    config_count = 0
+    for i, line in enumerate(lines):
+        # set array size
+        if line.startswith("#SBATCH --array="):
+            lines[i] = "#SBATCH --array=1-{0}\n".format(num_sims)
+
+        # ask for GPU resource, if using the cuda version
+        if use_cuda:
+            if line.startswith("##SBATCH --gres=gpu"):
+                lines[i] = line[1:]
+            elif line.startswith("#SBATCH -C"):
+                lines[i] = "##SBATCH -C sb&kepler\n"
+
+    # write configured submission script to run directory
+    with open(output_file, "w") as fh:
+        fh.write("".join(lines))
 
 ##################################################################
 # main program
@@ -109,41 +137,18 @@ if platform == "pan":
     fpan.close()
     os.chdir("slurm")
 
-    # read default submission script
-    with open(os.path.join(csdir, "run_sim_array.sl")) as fh:
-        lines = fh.readlines()
-    
-    # are we using CUDA
-    use_cuda = "cuda" in solver
-
-    # configure submission script
-    config_count = 0
-    for i, line in enumerate(lines):
-        # set array size
-        if line.startswith("#SBATCH --array="):
-            lines[i] = "#SBATCH --array=1-{0}\n".format(num_sims)
-            config_count += 1
-        
-        # ask for GPU resource, if using the cuda version
-        if use_cuda:
-            if line.startswith("##SBATCH --gres=gpu"):
-                lines[i] = line[1:]
-                config_count += 1
-            elif line.startswith("#SBATCH -C"):
-                lines[i] = "##SBATCH -C sb&kepler\n"
-                config_count += 1
-
-    # check submission script configured correctly
-    config_count_correct = 3 if use_cuda else 1
-    if config_count != config_count_correct:
-        raise RuntimeError("Failed to configure SLURM submission script (%d)!" % config_count)
-
-    # write configured submission script to run directory
-    with open("_run_sim_array.sl", "w") as fh:
-        fh.write("".join(lines))
+    # configure slurm scripts
+    configure_slurm(os.path.join(csdir, "slurm", "run_sim_array.sl"), "_run_sim_array.sl")
+    configure_slurm(os.path.join(csdir, "slurm", "run_sim_single.sl"), "_run_sim_single.sl")
 
     # submit slurm script
-    os.system("sbatch _run_sim_array.sl")
+    job_output = subprocess.check_output("sbatch _run_sim_array.sl", stderr=subprocess.STDOUT, shell=True)
+    array = job_output.split()
+    jobid = array[-1]
+    print("Submitted slurm job: {0}".format(jobid))
+
+    # submit script that checks results
+    os.system('sbatch --dependency=afterany:{0} {1} "{2}"'.format(jobid, os.path.join(csdir, "slurm", "run_sim_check.sl"), csdir))
 
     os.chdir("..")
 

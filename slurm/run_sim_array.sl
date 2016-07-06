@@ -1,14 +1,15 @@
 #!/bin/bash
 #SBATCH -J Cell_Sim
-#SBATCH -A nesi00119               # Project Account
-#SBATCH --time=0:29:00             # Walltime HH:MM:SS
-#SBATCH --mem-per-cpu=2G           # Memory
-#SBATCH --ntasks=1                 # number of tasks
-#SBATCH --cpus-per-task=1          # number of threads
-#SBATCH --output=slurm_output.txt  # output file
-#SBATCH --array=1-11               # size of array job (updated automatically)
-#SBATCH -C avx                     # run on ivybridge or sandybridge (faster than westmere)
-##SBATCH --gres=gpu:1              # for cuda version only! (updated automatically)
+#SBATCH -A nesi00119           # Project Account
+#SBATCH --time=0:29:00         # Walltime HH:MM:SS
+#SBATCH --mem-per-cpu=2G       # Memory
+#SBATCH --ntasks=1             # number of tasks
+#SBATCH --cpus-per-task=1      # number of threads
+#SBATCH --output=slurm.out     # output file
+#SBATCH --error=slurm.err      # error file
+#SBATCH --array=1-11           # size of array job (updated automatically)
+#SBATCH -C avx                 # run on ivybridge or sandybridge (faster than westmere)
+##SBATCH --gres=gpu:1          # for cuda version only! (updated automatically)
 
 # load module(s)
 module load intel/2015a
