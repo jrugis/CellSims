@@ -46,8 +46,16 @@ fig, plots = plt.subplots(rows, cols, sharex='col', sharey='all')
 fig.canvas.set_window_title(rdir + "  " + cell) 
 fig.text(0.02, 0.96, rdir + "  " + cell, fontsize=10)
 fig.set_size_inches(cols * 3, rows * 3)
-plots[rows-1, 0].set_xlabel("time (s)")
-plots[rows-1, 0].set_ylabel("CA+ concentration (uM)")
+if rows == 1:
+  plots[0].set_xlabel("time (s)")
+  plots[0].set_ylabel("CA+ concentration (uM)")  
+elif cols == 1:
+  plots[rows - 1].set_xlabel("time (s)")
+  plots[rows - 1].set_ylabel("CA+ concentration (uM)")
+else:
+  onedim = False
+  plots[rows-1, 0].set_xlabel("time (s)")
+  plots[rows-1, 0].set_ylabel("CA+ concentration (uM)")
 
 for i in range(rows):
   for j in range(cols):
@@ -60,8 +68,17 @@ for i in range(rows):
     x = np.linspace(0.0, t_end, t_end/t_delta, endpoint=True)
 
     # plot the calcium concentration
-    plots[rows-1-i, j].set_title(d, fontsize=10)
-    if os.path.isfile("cR.bin"):
+    if rows == 1:
+      plots[j].set_title(d, fontsize=10)
+      if os.path.isfile("cR.bin"):
+        plots[j].plot(x, np.transpose(cs.get_data("cR.bin")), lw=0.5)
+    elif cols == 1:
+      plots[rows-1-i].set_title(d, fontsize=10)
+      if os.path.isfile("cR.bin"):
+        plots[rows-1-i].plot(x, np.transpose(cs.get_data("cR.bin")), lw=0.5)
+    else:
+      plots[rows-1-i, j].set_title(d, fontsize=10)
+      if os.path.isfile("cR.bin"):
         plots[rows-1-i, j].plot(x, np.transpose(cs.get_data("cR.bin")), lw=0.5)
     os.chdir('..')
 

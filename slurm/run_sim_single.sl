@@ -2,10 +2,14 @@
 #SBATCH -J Cell_Sim
 #SBATCH -A nesi00119         # Project Account
 #SBATCH --time=0:29:00       # Walltime HH:MM:SS
-#SBATCH --mem-per-cpu=8G     # Memory
+#SBATCH --mem-per-cpu=2G     # Memory
 #SBATCH --ntasks=1           # number of tasks
 #SBATCH --cpus-per-task=1    # number of threads
+#SBATCH -C avx               # run on ivybridge or sandybridge (faster than westmere)
 ##SBATCH --gres=gpu:1         # for cuda version only!
+
+# set the number of threads (should be the same as --cpus-per-task above)
+export OMP_NUM_THREADS=1
 
 # output some information
 echo $HOSTNAME
@@ -29,4 +33,3 @@ mv cs.msh "$vMesh.msh"
 
 # create reduced content output files
 python "$vRoot/post/cs_reduce_min-max.py" "."
-
