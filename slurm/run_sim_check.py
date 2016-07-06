@@ -8,42 +8,40 @@ import os
 import sys
 
 
+# get current directory
 slurmdir = os.getcwd()
 
-# read the list of jobs
+# loop over the list of jobs and check they worked
 with open("_pan_array.in") as fh:
-    lines = fh.readlines()
+    count = 0
+    for line in fh:
+        # job details
+        array = line.split()
+        jobdir = array[0]
+        mesh = array[3]
+        model = array[2]
+        csdir = array[4]
+        jobargs = " ".join(array[1:])
 
-# loop over and check they worked
-failed = []
-for line in lines:
-    # job details
-    array = line.split()
-    jobdir = array[0]
-    mesh = array[3]
-    model = array[2]
-    csdir = array[4]
-    jobargs = " ".join(array[1:])
+        # switch to job directory and check it worked
+        os.chdir(jobdir)
+        try:
+            if not os.path.exists("cR.bin"):
+                # job failed
+                print("Job failed in: {0}".format(jobdir))
 
-    # switch to job directory and check it worked
-    os.chdir(jobdir)
-    try:
-        if not os.path.exists("cR.bin"):
-            # job failed
-            print("Job failed in: {0}".format(jobdir))
+                # copy mesh and parameter files
+                os.system("cp -f " + csdir + "/meshes/" + mesh + ".msh cs.msh")
+                os.system("cp -f " + csdir + "/parameters/" + model + ".dat cs.dat")
 
-            # copy mesh and parameter files
-            os.system("cp -f " + csdir + "/meshes/" + mesh + ".msh cs.msh")
-            os.system("cp -f " + csdir + "/parameters/" + model + ".dat cs.dat")
+                # resubmit
+                print("  Running: sbatch {0} {1}".format(os.path.join(slurmdir, "_run_sim_single.sl"), jobargs))
+                os.system("sbatch {0} {1}".format(os.path.join(slurmdir, "_run_sim_single.sl"), jobargs))
 
-            # resubmit
-            print("  Running: sbatch {0} {1}".format(os.path.join(slurmdir, "_run_sim_single.sl"), jobargs))
-            os.system("sbatch {0} {1}".format(os.path.join(slurmdir, "_run_sim_single.sl"), jobargs))
+                count += 1
 
-            failed.append(jobdir)
-
-    finally:
-        os.chdir(slurmdir)
+        finally:
+            os.chdir(slurmdir)
 
 # output
-print("{0} jobs failed".format(len(failed)))
+print("{0} jobs failed".format(count))

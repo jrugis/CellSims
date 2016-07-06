@@ -44,7 +44,6 @@ def configure_slurm(default_file, output_file):
     use_cuda = "cuda" in solver
 
     # configure submission script
-    config_count = 0
     for i, line in enumerate(lines):
         # set array size
         if line.startswith("#SBATCH --array="):
@@ -148,7 +147,7 @@ if platform == "pan":
     print("Submitted slurm job: {0}".format(jobid))
 
     # submit script that checks results
-    os.system('sbatch --dependency=afterany:{0} {1} "{2}"'.format(jobid, os.path.join(csdir, "slurm", "run_sim_check.sl"), csdir))
+    os.system('sbatch --dependency=afterany:{0} "{1}" "{2}"'.format(jobid, os.path.join(csdir, "slurm", "run_sim_check.sl"), csdir))
 
     os.chdir("..")
 
