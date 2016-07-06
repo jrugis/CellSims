@@ -32,7 +32,7 @@ vRoot=$5    # simulation root directory
 
 # switch to working directory
 echo "$HOSTNAME : $1"
-cd $1
+cd "$1"
 
 # run the job
 srun -o "$vExe.txt" "$vRoot/executables/$vExe"
