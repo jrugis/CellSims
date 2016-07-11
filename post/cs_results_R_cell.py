@@ -46,7 +46,10 @@ fig, plots = plt.subplots(rows, cols, sharex='col', sharey='all')
 fig.canvas.set_window_title(rdir + "  " + cell) 
 fig.text(0.02, 0.96, rdir + "  " + cell, fontsize=10)
 fig.set_size_inches(cols * 3, rows * 3)
-if rows == 1:
+if rows == cols == 1:
+  plots.set_xlabel("time (s)")
+  plots.set_ylabel("CA+ concentration (uM)")
+elif rows == 1:
   plots[0].set_xlabel("time (s)")
   plots[0].set_ylabel("CA+ concentration (uM)")  
 elif cols == 1:
@@ -68,7 +71,11 @@ for i in range(rows):
     x = np.linspace(0.0, t_end, t_end/t_delta, endpoint=True)
 
     # plot the calcium concentration
-    if rows == 1:
+    if rows == cols == 1:
+      plots.set_title(d, fontsize=10)
+      if os.path.isfile("cR.bin"):
+        plots.plot(x, np.transpose(cs.get_data("cR.bin")), lw=0.5)
+    elif rows == 1:
       plots[j].set_title(d, fontsize=10)
       if os.path.isfile("cR.bin"):
         plots[j].plot(x, np.transpose(cs.get_data("cR.bin")), lw=0.5)
