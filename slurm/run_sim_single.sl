@@ -31,5 +31,7 @@ srun -o "$vExe.txt" "$vRoot/executables/$vExe"
 mv cs.dat "$vModel.dat"
 mv cs.msh "$vMesh.msh"
 
-# create reduced content output files
-python "$vRoot/post/cs_reduce_min-max.py" "."
+if [ -f c.bin ]; then
+    # create reduced content output files
+    python "$vRoot/post/cs_reduce_min-max.py" "."
+fi
