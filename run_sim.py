@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import unicode_literals
 import os
 import time
 import shutil
@@ -20,7 +21,7 @@ def replace_pvalue(p, v):
       continue
     p_names = line.split()[1:]
     if p in p_names:  # parameter in the line?
-      p_values = fin.next().split();
+      p_values = next(fin).split();
       for i in range(len(p_names)):
         if p_names[i] == (p): 
           fout.write(str(v))  # replace the value
@@ -142,7 +143,7 @@ if platform == "pan":
 
     # submit slurm script
     job_output = subprocess.check_output("sbatch _run_sim_array.sl", stderr=subprocess.STDOUT, shell=True)
-    array = job_output.split()
+    array = job_output.decode("utf-8").split()
     jobid = array[-1]
     print("Submitted slurm job: {0}".format(jobid))
 
