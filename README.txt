@@ -45,7 +45,7 @@ To run a parameter sweep simulation, either under on a linux workstation or on t
     for a given cell: 
       python post/cs_results_R_cell.py results/DIR_NAME CELL_NUMBER
     across all cells for a given parameter:
-      python post/cs_results_R_parms.py results/DIR_NAME PARAMETERS
+      python post/cs_results_R_parm.py results/DIR_NAME PARAMETERS
 
   display individual results:
     python post/cs_results_R-single.py results/DIR_NAME/SUB_DIR_NAME
