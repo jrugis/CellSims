@@ -6,6 +6,7 @@ Check the simulations finished successfully and restart ones that didn't.
 from __future__ import print_function
 import os
 import sys
+import shutil
 
 
 # get current directory
@@ -31,8 +32,10 @@ with open("_pan_array.in") as fh:
                 print("Job failed in: {0}".format(jobdir))
 
                 # copy mesh and parameter files
-                os.system("cp -f " + csdir + "/meshes/" + mesh + ".msh cs.msh")
-                os.system("cp -f " + csdir + "/parameters/" + model + ".dat cs.dat")
+                if not os.path.exists("cs.dat"):
+                    shutil.copy(model + ".dat", "cs.dat")
+                if not os.path.exists("cs.msh"):
+                    shutil.copy(mesh + ".msh", "cs.msh")
 
                 # resubmit
                 print("  Running: sbatch {0} {1}".format(os.path.join(slurmdir, "_run_sim_single.sl"), jobargs))
