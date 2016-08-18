@@ -25,11 +25,11 @@ vMesh=$3    # mesh name
 vRoot=$4    # simulation root directory
 
 # run the job
-srun -o "$vExe.rerun.txt" "$vRoot/executables/$vExe"
+srun -o "$vExe.txt" "$vRoot/executables/$vExe"
 
 # post-processing
-mv cs.dat "$vModel.rerun.dat"
-mv cs.msh "$vMesh.rerun.msh"
+mv cs.dat "$vModel.dat"
+mv cs.msh "$vMesh.msh"
 
 if [ -f c.bin ]; then
     # create reduced content output files
