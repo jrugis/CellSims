@@ -76,7 +76,7 @@ def calc_walltime(run_time):
     secs = walltime % 60
     hrs = mins // 60
     mins = mins % 60
-    walltime_string = "%d:%d:%d" % (hrs, mins, secs)
+    walltime_string = "%d:%02d:%02d" % (hrs, mins, secs)
     
     return walltime_string
 
