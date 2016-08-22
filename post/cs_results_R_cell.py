@@ -1,3 +1,4 @@
+from __future__ import print_function
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -34,7 +35,7 @@ for d in dirs:
 valsA = sorted(list(set(valsA)))
 valsB = sorted(list(set(valsB)))
 
-print valsA, valsB
+print(valsA, valsB)
 
 plt.ioff()
 

@@ -8,15 +8,12 @@
 #SBATCH -C avx               # run on ivybridge or sandybridge (faster than westmere)
 ##SBATCH --gres=gpu:1         # for cuda version only!
 
-# set the number of threads (should be the same as --cpus-per-task above)
-export OMP_NUM_THREADS=1
-
 # output some information
 echo $HOSTNAME
 
 # load module(s)
 module load intel/2015a
-module load Python/2.7.9-intel-2015a
+module load Python/3.5.1-intel-2015a
 
 # get variables from command line
 vExe=$1   # executable name
