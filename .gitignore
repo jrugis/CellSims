@@ -4,6 +4,6 @@ _*
 
 generic3d_0?
 *.pyc
-
+__pycache__/
 
 

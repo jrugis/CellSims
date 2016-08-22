@@ -13,7 +13,7 @@ echo $HOSTNAME
 
 # load module(s)
 module load intel/2015a
-module load Python/2.7.9-intel-2015a
+module load Python/3.5.1-intel-2015a
 
 # get variables from command line
 vExe=$1   # executable name

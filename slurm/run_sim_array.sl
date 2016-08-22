@@ -13,7 +13,7 @@
 
 # load module(s)
 module load intel/2015a
-module load Python/2.7.9-intel-2015a
+module load Python/3.5.1-intel-2015a
 module load CUDA/7.5.18
 
 # check array file exists
