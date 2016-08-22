@@ -52,7 +52,7 @@ def calc_walltime(run_time):
     # minimum walltime for a job (seconds)
     min_walltime = 600
     # overhead (applied on top of minimum)
-    overhead_scaling = 1.6
+    overhead_scaling = 2.0
 
     # some parameters differ for 3 and 4 variable
     if "04" in model:
