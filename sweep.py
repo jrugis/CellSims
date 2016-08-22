@@ -51,6 +51,11 @@ def sweep_parms():
   #parmB = "IPRdn"
   #valsB = [0.4]
 
+  #parmA = "IPRdn"
+  #valsA = [0.4]
+  #parmB = "IPRdf"
+  #valsB = [2.5]
+
   parmA = "VPLC"
   valsA = [0.01, 0.02, 0.03, 0.04, 0.05]
   parmB = "kIPR"
