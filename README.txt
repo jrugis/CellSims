@@ -21,13 +21,10 @@ To run a parameter sweep simulation, either under on a linux workstation or on t
    edit platform, solver, model, mesh type, fixed and swept parameters in script file: 
      _my_sweep.py
 
-   (pan only) edit Walltime (at least ~5 minutes per every 100 seconds of simulation time) and resources as required:
-     run_sim.sl
-
 5) Run the simulation:
 
   (pan only, required once per session) 
-     module load Python/2.7.9-intel-2015a 
+     module load Python/3.5.1-intel-2015a 
 
   execute python script: 
      python run_sim.py
