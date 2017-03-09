@@ -227,10 +227,12 @@ if platform == "pan":
     os.chdir("slurm")
 
     # calculate the memory requirement once
-    mem_required = calc_memory(sim_time)
+    #mem_required = calc_memory(sim_time)
+    mem_required = 8000
     
     # calculate the walltime requirement once
-    walltime_required = calc_walltime(sim_time)
+    #walltime_required = calc_walltime(sim_time)
+    walltime_required = "00:40:00"
 
     # configure slurm scripts
     configure_slurm(os.path.join(csdir, "slurm", "run_sim_array.sl"), "_run_sim_array.sl")
