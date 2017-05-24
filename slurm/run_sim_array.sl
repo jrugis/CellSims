@@ -10,6 +10,7 @@
 #SBATCH --array=1-11           # size of array job (updated automatically)
 #SBATCH -C avx                 # run on ivybridge or sandybridge (faster than westmere)
 ##SBATCH --gres=gpu:1          # for cuda version only! (updated automatically)
+#SBATCH --partition=debug
 
 # load module(s)
 module load intel/2015a
@@ -37,11 +38,11 @@ cd "$1"
 # run the job
 srun -o "$vExe.txt" "$vRoot/executables/$vExe"
 
-# post-processing
+# post-processingw
 mv cs.dat "$vModel.dat"
 mv cs.msh "$vMesh.msh"
 
 if [ -f c.bin ]; then
     # create reduced content output files
-    python "$vRoot/post/cs_reduce_min-max.py" "."
+    srun --output=reduce.txt --ntasks=1 python "$vRoot/post/cs_reduce_min-max.py" "."
 fi

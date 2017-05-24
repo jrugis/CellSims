@@ -33,7 +33,7 @@ def replace_pvalue(p, v):
       continue
     p_names = line.split()[1:]
     if p in p_names:  # parameter in the line?
-      p_values = next(fin).split();
+      p_values = next(fin).split()
       for i in range(len(p_names)):
         if p_names[i] == (p): 
           fout.write(str(v))  # replace the value
@@ -232,7 +232,7 @@ if platform == "pan":
     
     # calculate the walltime requirement once
     #walltime_required = calc_walltime(sim_time)
-    walltime_required = "00:40:00"
+    walltime_required = "00:60:00"
 
     # configure slurm scripts
     configure_slurm(os.path.join(csdir, "slurm", "run_sim_array.sl"), "_run_sim_array.sl")
@@ -245,10 +245,9 @@ if platform == "pan":
     print("Submitted slurm job: {0}".format(jobid))
 
     # submit script that checks results
-    os.system('sbatch --dependency=afterany:{0} "{1}" "{2}"'.format(jobid, os.path.join(csdir, "slurm", "run_sim_check.sl"), csdir))
+    os.system('sbatch --dependency=afterany:{0} "{1}" "{2}" {0}'.format(jobid, os.path.join(csdir, "slurm", "run_sim_check.sl"), csdir))
 
     os.chdir("..")
 
 # go back to top level
 os.chdir(csdir)
-
