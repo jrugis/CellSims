@@ -29,7 +29,7 @@ def sweep_parms():
   model = "generic3d_03"   # using implicit Cer diffusion constant
   #model = "generic3d_04"   # separate Cer diffusion constant
   #mesh_type = "m_HARMONIC_100p"
-  mesh_type = "N4_p3-p2-p4"
+  mesh_type = "_N4_p3-p2-p4"
 
   #######################################
   # list fixed parameters (if any)
