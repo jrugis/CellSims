@@ -52,20 +52,20 @@ def calc_walltime(run_time):
     # minimum walltime for a job (seconds)
     min_walltime = 600
     # overhead (applied on top of minimum)
-    overhead_scaling = 2.0
+    overhead_scaling = 1.6
 
     # some parameters differ for 3 and 4 variable
     if "04" in model:
         # intercept for linear fit (seconds)
-        intercept = 49.6
+        intercept = 8.33
         # slope for linear fit
-        slope = 1.54
+        slope = 4.68
         
     else:
         # intercept for linear fit (seconds)
-        intercept = 44.2
+        intercept = 77.33
         # slope for linear fit
-        slope = 1.2324
+        slope = 3.93
     
     # calculate the walltime
     walltime = max(min_walltime, intercept + slope * run_time) * overhead_scaling
@@ -90,15 +90,15 @@ def calc_memory(run_time):
     # some parameters differ for 3 and 4 variable
     if "04" in model:
         # intercept for linear fit (seconds)
-        intercept = 300.0
+        intercept = -252.02
         # slope for linear fit
-        slope = 5.5
+        slope = 11.33
         
     else:
         # intercept for linear fit (seconds)
-        intercept = 70.7
+        intercept = -298.28
         # slope for linear fit
-        slope = 4.35
+        slope = 9.41
     
     # calculate the memory requirement
     mem = max(min_mem, slope * run_time + intercept) + overhead
@@ -227,12 +227,10 @@ if platform == "pan":
     os.chdir("slurm")
 
     # calculate the memory requirement once
-    #mem_required = calc_memory(sim_time)
-    mem_required = 8000
+    mem_required = calc_memory(sim_time)
     
     # calculate the walltime requirement once
-    #walltime_required = calc_walltime(sim_time)
-    walltime_required = "00:60:00"
+    walltime_required = calc_walltime(sim_time)
 
     # configure slurm scripts
     configure_slurm(os.path.join(csdir, "slurm", "run_sim_array.sl"), "_run_sim_array.sl")

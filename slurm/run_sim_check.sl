@@ -6,7 +6,6 @@
 #SBATCH --ntasks=1           # number of tasks
 #SBATCH --cpus-per-task=1    # number of threads
 #SBATCH --output=check.out   # output file
-#SBATCH --partition=debug
 
 # load module(s)
 module load Python/2.7.9-intel-2015a
