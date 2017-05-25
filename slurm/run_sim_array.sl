@@ -43,5 +43,5 @@ mv cs.msh "$vMesh.msh"
 
 if [ -f c.bin ]; then
     # create reduced content output files
-    python "$vRoot/post/cs_reduce_min-max.py" "."
+    srun --output=reduce.txt --ntasks=1 python "$vRoot/post/cs_reduce_min-max.py" "."
 fi
