@@ -37,7 +37,7 @@ cd "$1"
 # run the job
 srun -o "$vExe.txt" "$vRoot/executables/$vExe"
 
-# post-processingw
+# post-processing
 mv cs.dat "$vModel.dat"
 mv cs.msh "$vMesh.msh"
 
